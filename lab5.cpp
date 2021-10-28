@@ -1,0 +1,68 @@
+﻿#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <windows.h>
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	SetConsoleCP(1251);
+	int n;
+	std::cout<<"Введите количество символов: ";
+	std::cin >> n;
+	char stroka[100];
+	for ( int i = 0; i < n; i++)
+		std::cin>>stroka[i];
+	for (int i = 0; i < strlen(stroka); i++)
+	{
+		if (stroka[i] > 'а' && stroka[i] < 'я' && stroka[i]!= 'е' && stroka[i] != 'и' && stroka[i] != 'ы' && stroka[i] != 'о' && stroka[i] != 'у' && stroka[i] != 'ю' && stroka[i] != 'э' && stroka[i] != 'ё')
+			stroka[i] -= 32;
+	}
+	std::cout<<"Результат: "<<std::endl;
+	for (int i = 0; i < n; i++)
+		std::cout<<stroka[i] << " ";
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	SetConsoleCP(1251);        
+	char b1, b2;
+	std::cout << "Введите 2 русских буквы: " << std::endl;
+	std::cin >> b1 >> b2;
+	std::ifstream in("input.txt");
+	std::ofstream out("output.txt");
+	std::string words[5000];
+	int size = 0, mins=7;
+	while (!in.eof())
+	{
+		std::string word;
+		in >> word;
+		bool consistA = false;
+		for (int i = 0; i < word.length(); i++)
+			for (int j = 0; j < word.length(); j++)
+				if (word[i] == b1 && word[j] == b2 && word.length() < mins)
+					consistA = true;
+		bool isInWords=true;
+		if (consistA)
+		{			
+			for (int i = 0; i < size - 1; i++)
+				for (int j = i; j < size; j++)
+					if (words[i] == words[j])
+						isInWords = false;			
+			if (isInWords)
+			{
+				words[size] = word;
+				size++;				
+			}			
+		}		
+	}	
+	for (int i = 0; i < size-1; i++)
+		for (int j = i+1; j < size; j++)
+			if (words[i].length() < words[j].length())
+			{
+				std::swap(words[i], words[j]);
+			}
+	for (int i = 0; i < size; i++)
+		out << words[i] << " ";
+}
