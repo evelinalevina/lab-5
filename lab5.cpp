@@ -43,16 +43,19 @@ int main()
 		in >> word;
 		
 		bool consistA = false;
+		bool consistB = false;
 		for (int i = 0; i < word.length(); i++)
 		{
 			if (word[i] == b1)
 				consistA = true;
+		}				
+		for (int i = 0; i < word.length(); i++)
+		{			
 			if (word[i] == b2)
-				consistA = true;
+				consistB = true;
 		}
-				
 		bool isInWords=true;
-		if (consistA)
+		if (consistA && consistB)
 		{
 			for (int i = 0; i < size - 1; i++)
 					if (words[i] == word)
@@ -64,7 +67,7 @@ int main()
 			}			
 		}		
 	}	
-	for (int i = 0; i < size-1; i++)
+	for (int i = 0; i < size; i++)
 		for (int j = i+1; j < size; j++)
 			if (words[i].length() > words[j].length())
 			{
