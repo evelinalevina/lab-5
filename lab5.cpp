@@ -55,9 +55,9 @@ int main()
 				consistB = true;
 		}
 		bool isInWords=true;
-		if (consistA || consistB)
+		if (consistA && consistB)
 		{
-			for (int i = 0; i < size - 1; i++)
+			for (int i = 0; i < size; i++)
 					if (words[i] == word)
 						isInWords = false;			
 			if (isInWords)
